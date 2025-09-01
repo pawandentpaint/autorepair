@@ -1,43 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pawan Denting & Painting | Auto Repair Shop in Hisar</title>
+  <meta name="description" content="Pawan Denting & Painting offers expert denting, painting, mechanical & electrical car repair services in Auto Market, Hisar. Call 9034495463 for quick service." />
+  <meta name="keywords" content="auto repair Hisar, denting painting hisar, car service, brake repair, clutch gearbox, full body repainting, mechanical electrical works" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --brand:#ff4d30; --brand-2:#0ea5e9; }
+    html { scroll-behavior:smooth }
+    body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif }
+    .glass{ background:rgba(255,255,255,.06); backdrop-filter: blur(8px); border:1px solid rgba(255,255,255,.08) }
+    .section{ padding: 4rem 0 }
+    .shadow-soft{ box-shadow: 0 10px 30px rgba(2,6,23,.15) }
+    .badge{ border-radius:9999px; border:1px solid rgba(255,255,255,.2); padding:.25rem .6rem }
+    .grid-auto-fit{ display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem }
+    .container{ max-width:1120px }
+    
+    /* ---- Fancy hovers ---- */
+    .hover-card{ transition: transform .35s ease, box-shadow .35s ease, background .35s ease; }
+    .hover-card:hover{ transform: translateY(-6px) scale(1.01); box-shadow: 0 20px 40px rgba(0,0,0,.25) }
+    .nav-link{ position:relative; }
+    .nav-link::after{ content:""; position:absolute; left:0; bottom:-6px; height:2px; width:0; background:linear-gradient(90deg,var(--brand),var(--brand-2)); transition:width .3s ease }
+    .nav-link:hover::after{ width:100% }
+    .btn-shine{ position:relative; overflow:hidden }
+    .btn-shine::before{ content:""; position:absolute; inset:-100% auto auto -100%; width:60%; height:200%; transform:rotate(20deg); background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent); transition:transform .6s ease }
+    .btn-shine:hover::before{ transform:translateX(260%) rotate(20deg) }
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    /* ---- Scroll reveal ---- */
+    [data-animate]{ opacity:0; transform: translateY(14px); transition: all .6s cubic-bezier(.2,.7,.2,1); }
+    .show{ opacity:1; transform:none }
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    /* ---- Gradient text shimmer ---- */
+    .grad-text{ background:linear-gradient(90deg, #fff, #b8c1ff, #fff); -webkit-background-clip:text; background-clip:text; color:transparent; background-size:200% 100%; animation: shimmer 6s ease-in-out infinite }
+    @keyframes shimmer{ 0%{background-position:0% 0} 50%{background-position:100% 0} 100%{background-position:0% 0} }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+    /* ---- Image zoom hover ---- */
+    .zoom-img{ transform: scale(1); transition: transform .5s ease, opacity .5s ease }
+    .zoom-wrap:hover .zoom-img{ transform: scale(1.06); opacity:.95 }
+
+    /* ---- Floating pulse for WhatsApp ---- */
+    .pulse{ position:relative }
+    .pulse::after{ content:""; position:absolute; inset:-6px; border-radius:16px; border:2px solid rgba(16,185,129,.35); animation:pulse 1.8s ease-out infinite }
+    @keyframes pulse{ 0%{ opacity:1; transform:scale(.95) } 70%{ opacity:0; transform:scale(1.2) } 100%{ opacity:0 } }
+
+    /* ---- Sticky header shadow on scroll ---- */
+    .elevate{ box-shadow: 0 10px 30px rgba(0,0,0,.25) }
+
+    /* ---- Scroll progress bar ---- */
+    #progress{ position:fixed; top:0; left:0; height:3px; width:0; background:linear-gradient(90deg,var(--brand),var(--brand-2)); z-index:60 }
+
+    /* Enhance select and input visibility in booking section */
+    #bookingForm input,
+    #bookingForm select,
+    #bookingForm option,
+    #bookingForm textarea {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+    #bookingForm select:focus,
+    #bookingForm input:focus,
+    #bookingForm textarea:focus {
+      background-color: #f9fafb !important;
+      color: #000000 !important;
+    }
+  </style>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='24' fill='%230f172a'/%3E%3Cpath d='M26 78c8-30 29-46 65-39' stroke='%23ff4d30' stroke-width='10' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='42' cy='92' r='10' fill='%23fff'/%3E%3Ccircle cx='90' cy='92' r='10' fill='%23fff'/%3E%3C/svg%3E" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Pawan Denting & Painting — Auto Repair in Hisar" />
+  <meta property="og:description" content="Denting, painting, mechanical & electrical works. Call now for fast service." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0f172a/ffffff&text=Pawan+Denting+%26+Painting" />
+  
+  <!-- Schema.org JSON-LD for Local Business -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": "Pawan Denting and Painting, Mechanical and Electrical Works",
+    "image": "",
+    "url": "",
+    "telephone": "+91 9034495463",
+    "additionalProperty": [{"@type":"PropertyValue","name":"Secondary phone","value":"+91 8396016463"}],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Shop 463/F, Auto Market",
+      "addressLocality": "Hisar",
+      "addressRegion": "Haryana",
+      "postalCode": "125001",
+      "addressCountry": "IN"
+    },
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "09:00",
+      "closes": "19:00"
+    }],
+    "sameAs": []
+  }
+  </script>
+</head>
+<body class="bg-slate-950 text-slate-100">
+  <div id="progress"></div>
+  <!-- Top bar -->
+  <div id="topbar" class="w-full bg-slate-900/80 sticky top-0 z-50 backdrop-blur border-b border-white/5 transition-shadow">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#home" class="flex items-center gap-2 group">
+        <span class="inline-flex items-center justify-center w-9 h-9 rounded-2xl bg-white/10 group-hover:bg-white/15 transition-colors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 16c2.5-9 9-13.5 20-11" stroke="%23ff4d30" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="18" r="2" fill="white"/><circle cx="18" cy="18" r="2" fill="white"/></svg></span>
+        <span class="font-extrabold tracking-tight grad-text">Pawan Denting & Painting</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a class="nav-link hover:text-white" href="#about">About</a>
+        <a class="nav-link hover:text-white" href="#services">Services</a>
+        <a class="nav-link hover:text-white" href="#gallery">Gallery</a>
+        <a class="nav-link hover:text-white" href="#testimonials">Reviews</a>
+        <a class="nav-link hover:text-white" href="#contact">Contact</a>
+      </nav>
+      <div class="flex items-center gap-2">
+        <a href="tel:+919034495463" class="hidden sm:inline-flex px-3 py-2 rounded-xl bg-[var(--brand)] hover:opacity-90 font-semibold shadow-soft btn-shine">Call: 9034495463</a>
+        <button id="menuBtn" class="md:hidden p-2 rounded-xl bg-white/10" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+    <div id="mobileNav" class="md:hidden hidden border-t border-white/10">
+      <div class="container mx-auto px-4 py-4 grid gap-3">
+        <a href="#about" class="py-2">About</a>
+        <a href="#services" class="py-2">Services</a>
+        <a href="#gallery" class="py-2">Gallery</a>
+        <a href="#testimonials" class="py-2">Reviews</a>
+        <a href="#contact" class="py-2">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header id="home" class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,77,48,.15),rgba(14,165,233,.12)_30%,transparent_55%)]"></div>
+    <div class="container mx-auto px-4 section grid md:grid-cols-2 items-center gap-10">
+      <div data-animate>
+        <div class="badge text-xs text-white/90 inline-flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[var(--brand)]"></span> Since 1995 • 35+ years experience</div>
+        <h1 class="mt-4 text-4xl md:text-5xl font-extrabold leading-tight">Premium <span class="text-[var(--brand)]">Denting & Painting</span> with Complete Mechanical & Electrical Works</h1>
+        <p class="mt-4 text-white/80">We restore your car’s shine and performance — dent removal, full-body repainting, engine diagnostics, clutch & gearbox repair, brake service and more.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+         <a href="tel:+919034495463" class="px-5 py-3 rounded-2xl bg-[var(--brand)] font-semibold shadow-soft btn-shine">Call Now</a>
+          <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shop+463%2FF%2C+Auto+Market%2C+Hisar" class="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/15 font-semibold transition-colors">Get Directions</a>
+          <a href="#booking" class="px-5 py-3 rounded-2xl bg-[var(--brand-2)]/90 hover:bg-[var(--brand-2)] font-semibold btn-shine">Book Appointment</a>
+
+        </div>
+        <ul class="mt-6 text-sm text-white/70 grid sm:grid-cols-2 gap-2 list-disc list-inside">
+          <li>Expert color matching & oven baked finishing</li>
+          <li>Expert in accidental work</li>
+          <li>Engine, clutch & gearbox repair</li>
+          <li>Brake pads, discs & fluid service</li>
+          <li>Insurance & accidental claims support</li>
+        </ul>
+      </div>
+      <div class="relative" data-animate>
+        <div class="rounded-3xl overflow-hidden border border-white/10 shadow-soft bg-gradient-to-br from-slate-800 to-slate-900 zoom-wrap w-[600px] h-[700px] mx-auto">
+  <img alt="Auto repair workshop" loading="lazy" src="images/WhatsApp Image 2025-08-13 at 2.41.49 PM.jpeg" class="w-full h-full object-cover opacity-100"/>
+</div>
+
+        <div class="absolute -bottom-6 -left-6 glass rounded-2xl p-4 shadow-soft" data-animate>
+          <div class="text-xs text-white/80">Trusted by <span class="font-bold text-white">5000+</span> customers</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <div class="space-y-4" data-animate>
+          <h2 class="text-3xl font-extrabold">About our auto repair workshop</h2>
+          <p class="text-white/80">At Pawan Denting and Painting, every service is tailored to your vehicle. Our skilled technicians handle denting, painting, mechanical and electrical repairs with precision. We focus on quality, safety and lasting results so you drive away confident.</p>
+          <div class="grid grid-cols-3 gap-3 text-center">
+            <div class="glass rounded-2xl p-4 hover-card"><div class="text-3xl font-extrabold">35+</div><div class="text-xs text-white/70">Years</div></div>
+            <div class="glass rounded-2xl p-4 hover-card"><div class="text-3xl font-extrabold">4</div><div class="text-xs text-white/70">Techs</div></div>
+            <div class="glass rounded-2xl p-4 hover-card"><div class="text-3xl font-extrabold">5000+</div><div class="text-xs text-white/70">Happy Clients</div></div>
+          </div>
+        </div>
+        <div class="glass rounded-3xl p-6" data-animate>
+          <h3 class="font-bold text-lg mb-3">Why choose us</h3>
+          <ul class="space-y-2 text-white/80">
+            <li>✅ OEM-grade paints & materials</li>
+            <li>✅ Colour match & panel alignment accuracy</li>
+            <li>✅ Transparent estimates & timely delivery</li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section bg-slate-900/40 border-y border-white/5">
+    <div class="container mx-auto px-4">
+      <div class="flex items-end justify-between gap-4 mb-6" data-animate>
+        <h2 class="text-3xl font-extrabold">Auto repair services we offer</h2>
+        <a href="#booking" class="text-sm underline underline-offset-4 hover:opacity-80">Book a slot →</a>
+      </div>
+      <div class="grid-auto-fit">
+        <!-- Service cards -->
+        <article class="glass rounded-3xl p-5 flex flex-col gap-3 hover-card" data-animate>
+          <h3 class="font-bold text-lg">Expert denting & painting</h3>
+          <p class="text-white/80">From minor dents to full body repainting — a flawless finish that restores factory look.</p>
+        </article>
+        <article class="glass rounded-3xl p-5 flex flex-col gap-3 hover-card" data-animate>
+          <h3 class="font-bold text-lg">Comprehensive mechanical</h3>
+          <p class="text-white/80">Engine diagnostics, clutch & gearbox repair, suspension and general service.</p>
+        </article>
+        <article class="glass rounded-3xl p-5 flex flex-col gap-3 hover-card" data-animate>
+          <h3 class="font-bold text-lg">Brake system maintenance</h3>
+          <p class="text-white/80">Pads, discs, fluid and line checks to ensure safe stopping under all conditions.</p>
+        </article>
+        <article class="glass rounded-3xl p-5 flex flex-col gap-3 hover-card" data-animate>
+          <h3 class="font-bold text-lg">Electrical works</h3>
+          <p class="text-white/80">Battery, alternator, starter, wiring and lighting diagnosis & repair.</p>
+        </article>
+        <article class="glass rounded-3xl p-5 flex flex-col gap-3 hover-card" data-animate>
+          <h3 class="font-bold text-lg">Accidental & insurance</h3>
+          <p class="text-white/80">Assistance with paperwork and quality repair to get you back on the road quickly.</p>
+        </article>
+        <article class="glass rounded-3xl p-5 flex flex-col gap-3 hover-card" data-animate>
+          <h3 class="font-bold text-lg">Detailing & polishing</h3>
+          <p class="text-white/80">Interior cleaning, exterior polish, ceramic coat options available on request.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="section">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-extrabold mb-6" data-animate>Recent work gallery</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="rounded-2xl border border-white/10 overflow-hidden zoom-wrap hover-card" data-animate>
+          <img loading="lazy" class="zoom-img w-full h-full object-cover" src="images\ChatGPT Image Aug 22, 2025, 12_22_53 PM.png" alt="Paint booth"/>
+        </div>
+        <div class="rounded-2xl border border-white/10 overflow-hidden zoom-wrap hover-card" data-animate>
+          <img loading="lazy" class="zoom-img w-full h-full object-cover" src="images\Dent work.png" alt="Dent repair"/>
+        </div>
+        <div class="rounded-2xl border border-white/10 overflow-hidden zoom-wrap hover-card" data-animate>
+          <img loading="lazy" class="zoom-img w-full h-full object-cover" src="images\Mechanic work.png" alt="Mechanical service"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="section bg-slate-900/40 border-y border-white/5">
+    <div class="container mx-auto px-4">
+      <div class="flex items-end justify-between gap-4 mb-6" data-animate>
+        <h2 class="text-3xl font-extrabold">What customers say</h2>
+        <span class="text-sm text-white/60">Real feedback from happy clients</span>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4">
+        <figure class="glass rounded-3xl p-5 hover-card" data-animate>
+          <blockquote class="text-white/80">“Quality service and great results. From denting to mechanical work, they impressed me with their expertise.”</blockquote>
+          <figcaption class="mt-3 text-sm text-white/60">— Pallavi</figcaption>
+        </figure>
+        <figure class="glass rounded-3xl p-5 hover-card" data-animate>
+          <blockquote class="text-white/80">“Attention to detail in painting is exceptional. My car runs smoother thanks to their mechanical service.”</blockquote>
+          <figcaption class="mt-3 text-sm text-white/60">— Ansh</figcaption>
+        </figure>
+        <figure class="glass rounded-3xl p-5 hover-card" data-animate>
+          <blockquote class="text-white/80">“Seamless dent repairs and a stunning paint job. Thorough and professional team.”</blockquote>
+          <figcaption class="mt-3 text-sm text-white/60">— Daksh</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking CTA -->
+  <section id="booking" class="section">
+    <div class="container mx-auto px-4">
+      <div class="glass rounded-3xl p-6 md:p-8 grid md:grid-cols-2 gap-8">
+        <div data-animate>
+          <h2 class="text-3xl font-extrabold">Book an appointment</h2>
+          <p class="mt-2 text-white/80">Choose a service and time. We’ll confirm on WhatsApp instantly.</p>
+          <ul class="mt-4 text-sm text-white/70 list-disc list-inside">
+            <li>Fast quote & confirmation</li>
+            <li>Free basic inspection</li>
+            <li>No advance needed</li>
+          </ul>
+        </div>
+        <form id="bookingForm" class="grid gap-3" data-animate>
+          <input required name="name" placeholder="Your Name" class="px-4 py-3 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand)] transition-colors duration-200" />
+          <input required name="phone" placeholder="Phone Number" class="px-4 py-3 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand)] transition-colors duration-200" />
+          <select required name="service" class="px-4 py-3 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand)] transition-colors duration-200">
+            <option value="Denting & Painting">Denting & Painting</option>
+            <option value="Mechanical Repair">Mechanical Repair</option>
+            <option value="Brake Service">Brake Service</option>
+            <option value="Electrical Diagnosis">Electrical Diagnosis</option>
+            <option value="Full Body Repaint">Full Body Repaint</option>
+          </select>
+          <div class="grid grid-cols-2 gap-3">
+            <input type="date" name="date" class="px-4 py-3 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand)] transition-colors duration-200" />
+            <input type="time" name="time" class="px-4 py-3 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand)] transition-colors duration-200" />
+          </div>
+          <textarea name="notes" rows="3" placeholder="Vehicle model & any notes (optional)" class="px-4 py-3 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-[var(--brand)] transition-colors duration-200"></textarea>
+          <button class="mt-2 px-5 py-3 rounded-2xl bg-[var(--brand)] font-semibold shadow-soft btn-shine hover:scale-[1.02] transition-transform">Send on WhatsApp</button>
+          <p id="formMsg" class="text-sm text-white/70"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Map -->
+  <section id="contact" class="section bg-slate-900/40 border-y border-white/5">
+    <div class="container mx-auto px-4 grid lg:grid-cols-2 gap-8">
+      <div data-animate>
+        <h2 class="text-3xl font-extrabold">Get in touch</h2>
+        <div class="mt-4 space-y-2 text-white/80">
+          <p><strong>Phone:</strong> <a class="underline hover:opacity-80" href="tel:+919034495463">9034495463</a> / <a class="underline hover:opacity-80" href="tel:+918396016463">8396016463</a></p>
+          <p><strong>Email:</strong> <a class="underline hover:opacity-80" href="mailto:anshgirdhar29@gmail.com">anshgirdhar29@gmail.com</a></p>
+          <p><strong>Address:</strong> Shop 463/F, Auto Market, Hisar, Haryana 125001</p>
+          <div class="flex gap-3 pt-2">
+            <a href="tel:+919034495463" class="px-4 py-2 rounded-xl bg-[var(--brand)] font-semibold btn-shine">Call Now</a>
+            <a target="_blank" href="https://www.google.com/maps/search/?api=1&query=Shop+463%2FF%2C+Auto+Market%2C+Hisar" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 transition-colors">Get Directions</a>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-3xl overflow-hidden border border-white/10 shadow-soft min-h-[300px] hover-card" data-animate>
+        <iframe title="Map to Pawan Denting & Painting" width="100%" height="100%" style="min-height:300px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Shop%20463%2FF%2C%20Auto%20Market%2C%20Hisar&output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="section pb-10">
+    <div class="container mx-auto px-4">
+      <div class="glass rounded-3xl p-6 flex flex-col md:flex-row items-center justify-between gap-4" data-animate>
+        <p class="text-white/70">© <span id="year"></span> Pawan Denting & Painting. All rights reserved.</p>
+        <div class="text-white/60 text-sm">Made with ♥ in Hisar</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a id="whBtn" aria-label="Chat on WhatsApp" href="https://wa.me/919034495463" class="fixed bottom-5 right-5 inline-flex items-center gap-2 px-4 py-3 rounded-2xl bg-green-500 text-white font-semibold shadow-soft hover:scale-[1.04] transition pulse">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.92 11.92 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 6L0 24l6.18-1.6A12 12 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.2-3.48-8.52zM12 22a9.9 9.9 0 0 1-5-1.38l-.36-.21-3.68.95.98-3.59-.24-.37A9.94 9.94 0 1 1 22 12 10 10 0 0 1 12 22zm5.46-7.09c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.46-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.47.13-.62.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.57-.48-.5-.67-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.05 1.02-1.05 2.48 0 1.46 1.08 2.87 1.23 3.07.15.2 2.13 3.25 5.16 4.55.72.31 1.28.5 1.72.64.72.23 1.37.2 1.88.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.18-1.42-.07-.12-.27-.2-.57-.35z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+
+  <!-- Back to top -->
+  <a href="#home" id="toTop" class="hidden fixed bottom-24 right-5 px-3 py-2 rounded-xl bg-white/10 backdrop-blur text-sm hover:bg-white/20 transition">↑ Top</a>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile nav toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    menuBtn?.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+
+    // Copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Booking form -> WhatsApp prefill
+    const bookingForm = document.getElementById('bookingForm');
+    const formMsg = document.getElementById('formMsg');
+    bookingForm?.addEventListener('submit', function(e){
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this).entries());
+      const when = [data.date, data.time].filter(Boolean).join(' ');
+      const text = `New Booking Request%0AName: ${encodeURIComponent(data.name||'')}%0APhone: ${encodeURIComponent(data.phone||'')}%0AService: ${encodeURIComponent(data.service||'')}%0AWhen: ${encodeURIComponent(when)}%0ANotes: ${encodeURIComponent(data.notes||'')}`;
+      const url = `https://wa.me/919034495463?text=${text}`;
+      formMsg.textContent = 'Opening WhatsApp…';
+      window.open(url, '_blank');
+    });
+
+    // Smooth anchor close mobile nav
+    document.querySelectorAll('#mobileNav a').forEach(a=>a.addEventListener('click',()=>mobileNav.classList.add('hidden')));
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+    },{threshold: .12});
+    document.querySelectorAll('[data-animate]').forEach(el=>io.observe(el));
+
+    // Sticky header shadow + back-to-top toggle
+    const topbar = document.getElementById('topbar');
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', ()=>{
+      const sc = window.scrollY;
+      topbar.classList.toggle('elevate', sc > 10);
+      toTop.classList.toggle('hidden', sc < 400);
+      // progress bar
+      const h = document.documentElement;
+      const p = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+      document.getElementById('progress').style.width = p + '%';
+    });
+  </script>
+</body>
 </html>
